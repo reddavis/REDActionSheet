@@ -20,7 +20,7 @@ Action sheet similar to Tweetbot's.
 	[actionSheet showInView:self.view];
 ```
 
-Video: http://taylorswift.ly/FEF3
+Video: http://taylorswift.ly/T8B4
 
 ## Getting Started
 
