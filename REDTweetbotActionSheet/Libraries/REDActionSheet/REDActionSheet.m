@@ -262,11 +262,15 @@ static CGFloat const REDAnimationSpringDamping = 0.70;
 
 - (void)cancelButtonTapped:(id)sender
 {
-	[self dismiss];
+	self.selectedButtonIndex = self.buttons.count;
+	if (self.actionSheetWillDismissWithButtonIndexBlock)
+		self.actionSheetWillDismissWithButtonIndexBlock(self, self.selectedButtonIndex);
 	
 	if (self.actionSheetTappedButtonAtIndexBlock)
 		self.actionSheetTappedButtonAtIndexBlock(self, self.buttons.count);
 	
+	[self dismiss];
+		
 	if (self.actionSheetCancelBlock)
 		self.actionSheetCancelBlock(self);
 }
