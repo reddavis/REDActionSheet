@@ -29,5 +29,6 @@ typedef void(^REDActionSheetTappedButtonAtIndexBlock)(REDActionSheet *actionShee
 
 - (instancetype)initWithCancelButtonTitle:(NSString *)cancelButtonTitle destructiveButtonTitle:(NSString *)destructiveButtonTitle otherButtonTitlesList:(NSString *)otherButtonsList, ...;
 - (void)showInView:(UIView *)view;
+- (void)addButtonWithTitle:(NSString *)title;
 
 @end

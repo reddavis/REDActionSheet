@@ -59,6 +59,7 @@
 - (void)showActionSheetButtonTapped:(id)sender
 {
 	REDActionSheet *actionSheet = [[REDActionSheet alloc] initWithCancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitlesList:@"1", @"2", @"3", nil];
+    [actionSheet addButtonWithTitle:@"4"];
 	actionSheet.actionSheetTappedButtonAtIndexBlock = ^(REDActionSheet *actionSheet, NSUInteger buttonIndex) {
 		//...
 	};

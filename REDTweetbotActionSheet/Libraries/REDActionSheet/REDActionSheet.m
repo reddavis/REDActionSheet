@@ -53,23 +53,25 @@
 		[self addGestureRecognizer:tapGesture];
 		
 		// Build normal buttons
-		va_list args;
-		va_start(args, otherButtonsList);
-		NSString *argString = va_arg(args, NSString *);
-		
-		REDActionSheetButton *button = [self buttonWithTitle:otherButtonsList];
-		[button addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
-		[self.buttons addObject:button];
-		
-        while (argString)
-		{
-            REDActionSheetButton *button = [self buttonWithTitle:argString];
-			[button addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
+        if (otherButtonsList) {
+            va_list args;
+            va_start(args, otherButtonsList);
+            NSString *argString = va_arg(args, NSString *);
+            
+            REDActionSheetButton *button = [self buttonWithTitle:otherButtonsList];
+            [button addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
             [self.buttons addObject:button];
             
-            argString = va_arg(args, NSString *);
+            while (argString)
+            {
+                REDActionSheetButton *button = [self buttonWithTitle:argString];
+                [button addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
+                [self.buttons addObject:button];
+                
+                argString = va_arg(args, NSString *);
+            }
+            va_end(args);
         }
-		va_end(args);
 		
 		if (destructiveButtonTitle)
 		{
@@ -157,6 +159,13 @@ static CGFloat const REDActionSheetCancelButtonMargin = 5.0;
 	[self showButtons];
 }
 
+- (void)addButtonWithTitle:(NSString *)title
+{
+    REDActionSheetButton *button = [self buttonWithTitle:title];
+    [button addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [self.buttons addObject:button];
+}
+
 static CGFloat const REDShowAnimationDuration = 0.60;
 static CGFloat const REDDismissAnimationDuration = 0.4;
 static CGFloat const REDAnimationSpringDamping = 0.70;
@@ -215,7 +224,7 @@ static CGFloat const REDAnimationSpringDamping = 0.70;
 	} completion:^(BOOL finished) {
 		if (self.actionSheetDidDismissWithButtonIndexBlock)
 			self.actionSheetDidDismissWithButtonIndexBlock(self, self.selectedButtonIndex);
-
+        
 		[self removeFromSuperview];
 	}];
 }
