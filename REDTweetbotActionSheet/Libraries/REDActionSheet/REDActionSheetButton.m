@@ -35,7 +35,9 @@
 
 - (void)updateStyle
 {
-	self.titleLabel.font = [UIFont boldSystemFontOfSize:17.0];
+	UIFontDescriptor*bodyFontDesciptor=[UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleBody];
+    UIFontDescriptor*boldBodyFontDescriptor=[bodyFontDesciptor fontDescriptorWithSymbolicTraits:UIFontDescriptorTraitBold];
+    self.titleLabel.font=[UIFont fontWithDescriptor:boldBodyFontDescriptor size:0.0];
 	self.alpha = 0.98;
 	
 	if (self.highlighted)
