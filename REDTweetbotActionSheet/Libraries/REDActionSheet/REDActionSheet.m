@@ -168,7 +168,7 @@ static CGFloat const REDActionSheetCancelButtonMargin = 5.0;
 
 - (NSString*)titleForButtonAtIndex:(NSUInteger)buttonIndex
 {
-    if (buttonIndex <= [self.buttons count])
+    if (buttonIndex < [self.buttons count])
     {
         return [self.buttons[buttonIndex] titleForState:UIControlStateNormal];
     }
