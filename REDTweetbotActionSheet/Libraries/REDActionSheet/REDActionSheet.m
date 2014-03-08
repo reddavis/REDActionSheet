@@ -76,6 +76,7 @@
 		if (destructiveButtonTitle)
 		{
 			REDActionSheetButton *destructiveButton = [self destructiveButtonWithTitle:destructiveButtonTitle];
+            [destructiveButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
 			[self.buttons insertObject:destructiveButton atIndex:0];
 		}
 		
