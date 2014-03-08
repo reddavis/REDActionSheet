@@ -166,6 +166,23 @@ static CGFloat const REDActionSheetCancelButtonMargin = 5.0;
     [self.buttons addObject:button];
 }
 
+- (NSString*)titleForButtonAtIndex:(NSUInteger)buttonIndex
+{
+    if (buttonIndex <= [self.buttons count])
+    {
+        return [self.buttons[buttonIndex] titleForState:UIControlStateNormal];
+    }
+    
+    else if (buttonIndex == [self.buttons count])
+    {
+        //Cancel button index
+        return [self.cancelButton titleForState:UIControlStateNormal];
+    }
+    
+    //Out of bound index
+    return nil;
+}
+
 static CGFloat const REDShowAnimationDuration = 0.60;
 static CGFloat const REDDismissAnimationDuration = 0.4;
 static CGFloat const REDAnimationSpringDamping = 0.70;
