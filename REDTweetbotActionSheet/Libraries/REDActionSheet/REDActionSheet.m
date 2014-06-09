@@ -76,6 +76,7 @@
 		if (destructiveButtonTitle)
 		{
 			REDActionSheetButton *destructiveButton = [self destructiveButtonWithTitle:destructiveButtonTitle];
+            [destructiveButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
 			[self.buttons insertObject:destructiveButton atIndex:0];
 		}
 		
@@ -164,6 +165,23 @@ static CGFloat const REDActionSheetCancelButtonMargin = 5.0;
     REDActionSheetButton *button = [self buttonWithTitle:title];
     [button addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
     [self.buttons addObject:button];
+}
+
+- (NSString*)titleForButtonAtIndex:(NSUInteger)buttonIndex
+{
+    if (buttonIndex < [self.buttons count])
+    {
+        return [self.buttons[buttonIndex] titleForState:UIControlStateNormal];
+    }
+    
+    else if (buttonIndex == [self.buttons count])
+    {
+        //Cancel button index
+        return [self.cancelButton titleForState:UIControlStateNormal];
+    }
+    
+    //Out of bound index
+    return nil;
 }
 
 static CGFloat const REDShowAnimationDuration = 0.60;
